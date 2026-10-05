@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  hdfs-site.xml  – HDFS-specific settings for NameNode and DataNodes
+  Deployed to $HADOOP_HOME/etc/hadoop/ on all 3 nodes
+-->
+<configuration>
+
+  <!-- How many copies of each block to keep (2 = worker1 + worker2) -->
+  <property>
+    <name>dfs.replication</name>
+    <value>2</value>
+  </property>
+
+  <!-- Block size: 64 MB is optimal for log files in the hundreds of MB -->
+  <property>
+    <name>dfs.blocksize</name>
+    <value>67108864</value>
+  </property>
+
+  <!-- NameNode stores the filesystem metadata here -->
+  <property>
+    <name>dfs.namenode.name.dir</name>
+    <value>file:///opt/hadoop/data/namenode</value>
+  </property>
+
+  <!-- DataNode stores actual block data here (on worker1 and worker2) -->
+  <property>
+    <name>dfs.datanode.data.dir</name>
+    <value>file:///opt/hadoop/data/datanode</value>
+  </property>
+
+  <!-- HTTP port for the NameNode Web UI (http://master:9870) -->
+  <property>
+    <name>dfs.namenode.http-address</name>
+    <value>master:9870</value>
+  </property>
+
+  <!-- SecondaryNameNode Web UI -->
+  <property>
+    <name>dfs.namenode.secondary.http-address</name>
+    <value>master:9868</value>
+  </property>
+
+  <!-- Disable permission checks so the hadoop user can write freely -->
+  <property>
+    <name>dfs.permissions.enabled</name>
+    <value>false</value>
+  </property>
+
+  <!-- Allow DataNodes to connect from any host (useful in bridged VM network) -->
+  <property>
+    <name>dfs.datanode.hostname</name>
+    <value></value>
+  </property>
+
+</configuration>

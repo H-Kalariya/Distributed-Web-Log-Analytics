@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  core-site.xml  – tells every Hadoop component where HDFS lives
+  Deployed to $HADOOP_HOME/etc/hadoop/ on all 3 nodes by 02_ssh_and_config.sh
+-->
+<configuration>
+
+  <!-- Address of the NameNode: all clients and DataNodes connect here -->
+  <property>
+    <name>fs.defaultFS</name>
+    <value>hdfs://master:9000</value>
+    <description>URI of the default file system (HDFS on master, port 9000)</description>
+  </property>
+
+  <!-- Temporary scratch space used by Hadoop daemons -->
+  <property>
+    <name>hadoop.tmp.dir</name>
+    <value>/opt/hadoop/data/tmp</value>
+  </property>
+
+  <!-- Let the hadoop user proxy any other user (needed for Spark on YARN) -->
+  <property>
+    <name>hadoop.proxyuser.hadoop.hosts</name>
+    <value>*</value>
+  </property>
+  <property>
+    <name>hadoop.proxyuser.hadoop.groups</name>
+    <value>*</value>
+  </property>
+
+</configuration>
